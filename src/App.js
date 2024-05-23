@@ -1,25 +1,49 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useEffect, useState } from 'react';
+import { Layout } from 'antd';
+import MainTable from './components/MainTable';
+import LineGraph from './components/LineGraph';
+import JobDetailsTable from './components/JobDetailsTable';
+import { parseCSV } from './utils/parseCSV';
+import { aggregateData } from './utils/aggregateData';
 
-function App() {
+const { Header, Content } = Layout;
+
+const App = () => {
+  const [data, setData] = useState([]);
+  const [selectedYear, setSelectedYear] = useState(null);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const rawData = await parseCSV('/salaries.csv'); 
+      const aggregatedData = aggregateData(rawData);
+      setData(aggregatedData);
+    };
+
+    fetchData();
+  }, []);
+
+  const handleRowClick = (year) => {
+    setSelectedYear(year);
+  };
+
+  const jobDetails = selectedYear
+    ? data.find((item) => item.year === selectedYear)?.jobDetails
+    : [];
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Layout>
+      <Header>
+        <h1 style={{ color: 'white' }}>ML Engineer Salaries</h1>
+      </Header>
+      <Content style={{ padding: '20px' }}>
+        <MainTable data={data} onRowClick={handleRowClick} />
+        <LineGraph data={data} />
+        {selectedYear && jobDetails && (
+          <JobDetailsTable year={selectedYear} jobDetails={jobDetails} />
+        )}
+      </Content>
+    </Layout>
   );
-}
+};
 
 export default App;
