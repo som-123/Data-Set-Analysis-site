@@ -1,70 +1,71 @@
-# Getting Started with Create React App
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# Data Set Analysis Site
 
-## Available Scripts
+This project is a React application that displays a table of ML Engineer salaries from 2020 to 2024. It includes the following features:
 
-In the project directory, you can run:
+-A sortable table showing the number of jobs and average salary for each year.
 
-### `npm start`
+-A line graph showing the change in total jobs and average salary over the years.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+-A detailed table showing job titles and their counts for a selected year.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
 
-### `npm test`
+## Installation
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+Step 1: Clone the Repository
 
-### `npm run build`
+```bash
+  git clone https://github.com/som-123/Data-Set-Analysis-site.git
+  cd Data-Set-Analysis-site
+```
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+Step 2: Install Dependencies
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+```bash
+  npm install
+```
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+Step 3: Add/Replace CSV Data
+Place your salaries.csv file in the public directory of the project.
 
-### `npm run eject`
+Step 4: Start the React Application
+```bash
+  npm start
+```
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+    
+## Components
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+### MainTable
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+Displays the main table with the following columns:
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+-Year
 
-## Learn More
+-Number of total jobs for that year
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+-Average salary in USD
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+### LineGraph
 
-### Code Splitting
+Displays a line graph showing:
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+-Total jobs for each year from 2020 to 2024
 
-### Analyzing the Bundle Size
+-Average salary in USD for each year from 2020 to 2024
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+### JobDetailsTable
+Displays a detailed table showing:
 
-### Making a Progressive Web App
+-Job titles for a selected year
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+-Number of jobs for each title in that year
 
-### Advanced Configuration
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+## Utils
 
-### Deployment
+### parseCSV.js
+Utility function to fetch and parse the CSV data.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+### aggregateData.js
+Utility function to aggregate data for the main table and line graph.
